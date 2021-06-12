@@ -102,7 +102,7 @@ class NoteFragment : Fragment() {
         val noteBody = binding.etNoteBody.text.toString().trim()
 
         if (noteTitle.isNotEmpty()) {
-            val note = Note(note.id, noteTitle = noteTitle, noteBody = noteBody)
+            val note = Note(noteId, noteTitle = noteTitle, noteBody = noteBody)
 
             noteViewModel.updateNote(note)
             Toast.makeText(context, "updated", Toast.LENGTH_SHORT).show()
