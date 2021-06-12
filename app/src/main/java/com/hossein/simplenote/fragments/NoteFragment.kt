@@ -34,9 +34,6 @@ class NoteFragment : Fragment() {
         val args = arguments?.let { NoteFragmentArgs.fromBundle(it) }
         noteId = (args?.noteId?.id ?: 0) as Int
 
-        Toast.makeText(context, "$noteId", Toast.LENGTH_SHORT).show()
-
-
         noteViewModel = (activity as MainActivity).noteViewModel
         noteViewModel.loadNote(noteId)
     }
@@ -54,16 +51,19 @@ class NoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        noteViewModel.noteLiveData.observe(
-            viewLifecycleOwner,
-            Observer { note ->
-                note?.let {
-                    this.note = note
-                    binding.etNoteTitle.setText(note.noteTitle)
-                    binding.etNoteBody.setText(note.noteBody)
+        if (noteId != 0){
+            noteViewModel.noteLiveData.observe(
+                viewLifecycleOwner,
+                Observer { note ->
+                    note?.let {
+                        this.note = note
+                        binding.etNoteTitle.setText(note.noteTitle)
+                        binding.etNoteBody.setText(note.noteBody)
+                    }
                 }
-            }
-        )
+            )
+        }
+
 
         binding.fabAddNote.setOnClickListener {
             if (noteId == 1) {
@@ -72,6 +72,11 @@ class NoteFragment : Fragment() {
                 saveNote()
             }
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        binding.layout.removeAllViews()
     }
 
     override fun onDestroy() {
