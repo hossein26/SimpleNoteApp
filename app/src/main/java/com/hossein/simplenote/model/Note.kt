@@ -9,8 +9,8 @@ import java.util.*
 @Entity(tableName = "notes")
 @Parcelize
 data class Note(
-    @PrimaryKey
-    var id: UUID = UUID.randomUUID(),
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0,
     val noteTitle: String = "",
     val noteBody: String = ""
 ): Parcelable

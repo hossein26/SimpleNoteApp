@@ -24,22 +24,20 @@ class NoteFragment : Fragment() {
 
     private lateinit var note: Note
 
-    private lateinit var noteId: UUID
+    private var noteId: Int = 0
 
-    private var argsId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         note = Note()
 
         val args = arguments?.let { NoteFragmentArgs.fromBundle(it) }
-        noteId = args?.noteId?.id ?: UUID.randomUUID()
+        noteId = (args?.noteId?.id ?: 0) as Int
 
-        Toast.makeText(context, "$args", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "$noteId", Toast.LENGTH_SHORT).show()
 
-        if( NoteFragmentArgs(noteId == null) == args)
 
-            noteViewModel = (activity as MainActivity).noteViewModel
+        noteViewModel = (activity as MainActivity).noteViewModel
         noteViewModel.loadNote(noteId)
     }
 
@@ -68,12 +66,11 @@ class NoteFragment : Fragment() {
         )
 
         binding.fabAddNote.setOnClickListener {
-            if (argsId == 1){
+            if (noteId == 1) {
                 updateNote()
-            }else{
+            } else {
                 saveNote()
             }
-
         }
     }
 

@@ -10,7 +10,7 @@ import java.util.*
 class NoteViewModel(app: Application, private val noteRepository: NoteRepository) :
     AndroidViewModel(app) {
 
-    private val noteIdLiveData = MutableLiveData<UUID>()
+    private val noteIdLiveData = MutableLiveData<Int>()
 
     fun addNote(note: Note) =
         viewModelScope.launch {
@@ -34,7 +34,7 @@ class NoteViewModel(app: Application, private val noteRepository: NoteRepository
             noteRepository.getNote(noteId)
         }
 
-    fun loadNote(noteId: UUID){
+    fun loadNote(noteId: Int){
         noteIdLiveData.value = noteId
     }
 }
