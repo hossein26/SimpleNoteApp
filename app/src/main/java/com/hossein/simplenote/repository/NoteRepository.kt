@@ -3,7 +3,6 @@ package com.hossein.simplenote.repository
 import androidx.lifecycle.LiveData
 import com.hossein.simplenote.db.NoteDatabase
 import com.hossein.simplenote.model.Note
-import java.util.*
 
 class NoteRepository(private val db: NoteDatabase) {
 

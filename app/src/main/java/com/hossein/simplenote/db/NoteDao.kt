@@ -3,7 +3,6 @@ package com.hossein.simplenote.db
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.hossein.simplenote.model.Note
-import java.util.*
 
 @Dao
 interface NoteDao {

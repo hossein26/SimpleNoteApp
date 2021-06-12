@@ -27,6 +27,14 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
+                <View
+                    android:id="@+id/colorView"
+                    android:layout_width="match_parent"
+                    android:layout_height="3dp"
+                    android:elevation="8dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/ColorBlue" />
+
                 <EditText
                     android:id="@+id/etNoteTitle"
                     android:layout_width="match_parent"
@@ -71,5 +79,21 @@
         android:tintMode="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imgMore"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_more" />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,19 +1,18 @@
 package com.hossein.simplenote.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.hossein.simplenote.MainActivity
 import com.hossein.simplenote.R
 import com.hossein.simplenote.databinding.FragmentNoteBinding
 import com.hossein.simplenote.model.Note
 import com.hossein.simplenote.viewmodel.NoteViewModel
-import java.util.*
 
 class NoteFragment : Fragment() {
 
@@ -26,13 +25,17 @@ class NoteFragment : Fragment() {
 
     private var noteId: Int = 0
 
+    private var noteColor: String = "#FF000000"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         note = Note()
 
         val args = arguments?.let { NoteFragmentArgs.fromBundle(it) }
-        noteId = (args?.noteId?.id ?: 0) as Int
+        noteId = args?.noteId?.id ?: 0
+
+        noteColor = args?.noteColor ?: "#FF000000"
 
         noteViewModel = (activity as MainActivity).noteViewModel
         noteViewModel.loadNote(noteId)
@@ -51,10 +54,12 @@ class NoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (noteId != 0){
+        binding.colorView.setBackgroundColor(Color.parseColor(noteColor))
+
+        if (noteId != 0) {
             noteViewModel.noteLiveData.observe(
                 viewLifecycleOwner,
-                Observer { note ->
+                { note ->
                     note?.let {
                         this.note = note
                         binding.etNoteTitle.setText(note.noteTitle)
@@ -71,6 +76,12 @@ class NoteFragment : Fragment() {
             } else {
                 saveNote()
             }
+        }
+
+        binding.imgMore.setOnClickListener {
+            findNavController().navigate(
+                R.id.action_noteFragment_to_noteBottomSheetFragment
+            )
         }
     }
 
@@ -98,7 +109,7 @@ class NoteFragment : Fragment() {
                 R.id.action_noteFragment_to_homeFragment
             )
         } else {
-            Toast.makeText(context, "!!!!!!!!!!1", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "save failed!", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -116,7 +127,7 @@ class NoteFragment : Fragment() {
                 R.id.action_noteFragment_to_homeFragment
             )
         } else {
-            Toast.makeText(context, "!!!!!!!!!!1", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "update failed!", Toast.LENGTH_SHORT).show()
         }
     }
 

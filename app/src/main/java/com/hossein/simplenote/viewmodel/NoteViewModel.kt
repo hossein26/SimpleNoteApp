@@ -5,7 +5,6 @@ import androidx.lifecycle.*
 import com.hossein.simplenote.model.Note
 import com.hossein.simplenote.repository.NoteRepository
 import kotlinx.coroutines.launch
-import java.util.*
 
 class NoteViewModel(app: Application, private val noteRepository: NoteRepository) :
     AndroidViewModel(app) {

@@ -1,6 +1,5 @@
 package com.hossein.simplenote.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,7 @@ import com.hossein.simplenote.MainActivity
 import com.hossein.simplenote.R
 import com.hossein.simplenote.adapter.NoteAdapter
 import com.hossein.simplenote.databinding.FragmentHomeBinding
-import com.hossein.simplenote.model.Note
 import com.hossein.simplenote.viewmodel.NoteViewModel
-import java.util.*
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -24,10 +21,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

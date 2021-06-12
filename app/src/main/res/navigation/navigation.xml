@@ -29,5 +29,22 @@
             app:argType="com.hossein.simplenote.model.Note"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_noteFragment_to_noteBottomSheetFragment"
+            app:destination="@id/noteBottomSheetFragment" />
+        <argument
+            android:name="noteColor"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="#FF000000" />
     </fragment>
+
+    <dialog
+        android:id="@+id/noteBottomSheetFragment"
+        android:name="com.hossein.simplenote.fragments.NoteBottomSheetFragment"
+        android:label="NoteBottomSheetFragment" >
+        <action
+            android:id="@+id/action_noteBottomSheetFragment_to_noteFragment"
+            app:destination="@id/noteFragment" />
+    </dialog>
 </navigation>
