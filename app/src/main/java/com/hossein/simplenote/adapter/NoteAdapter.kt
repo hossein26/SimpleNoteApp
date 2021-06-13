@@ -1,5 +1,6 @@
 package com.hossein.simplenote.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -20,7 +21,8 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             override fun areItemsTheSame(oldItem: Note, newItem: Note): Boolean {
                 return oldItem.id == newItem.id &&
                         oldItem.noteBody == newItem.noteBody &&
-                        oldItem.noteTitle == newItem.noteTitle
+                        oldItem.noteTitle == newItem.noteTitle &&
+                        oldItem.color == newItem.color
             }
 
             override fun areContentsTheSame(oldItem: Note, newItem: Note): Boolean {
@@ -39,11 +41,13 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         )
     }
 
+
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote = differ.currentList[position]
 
         holder.itemBinding.tvNoteTitle.text = currentNote.noteTitle
         holder.itemBinding.tvNoteBody.text = currentNote.noteBody
+        holder.itemBinding.cardView.setCardBackgroundColor(Color.parseColor(currentNote.color))
 
         holder.itemView.setOnClickListener { view ->
 

@@ -73,6 +73,25 @@
                 app:tint="@color/white"/>
         </FrameLayout>
 
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="5dp"
+            android:id="@+id/fNote3">
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/note_color_3"/>
+
+            <ImageView
+                android:id="@+id/imgNote3"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                app:tint="@color/black"/>
+        </FrameLayout>
+
 
         <FrameLayout
             android:layout_width="wrap_content"

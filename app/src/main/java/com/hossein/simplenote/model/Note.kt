@@ -11,5 +11,6 @@ data class Note(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
     var noteTitle: String = "",
-    val noteBody: String = ""
+    val noteBody: String = "",
+    val color: String = "#FFFFFF"
 ): Parcelable

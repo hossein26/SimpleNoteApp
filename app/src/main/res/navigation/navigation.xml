@@ -32,11 +32,6 @@
         <action
             android:id="@+id/action_noteFragment_to_noteBottomSheetFragment"
             app:destination="@id/noteBottomSheetFragment" />
-        <argument
-            android:name="noteColor"
-            app:argType="string"
-            app:nullable="true"
-            android:defaultValue="#FF000000" />
     </fragment>
 
     <dialog
