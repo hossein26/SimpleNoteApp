@@ -1,18 +1,26 @@
 package com.hossein.simplenote.fragments
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.ViewCompat.jumpDrawablesToCurrentState
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import androidx.preference.PreferenceManager
 import com.hossein.simplenote.MainActivity
 import com.hossein.simplenote.R
 import com.hossein.simplenote.databinding.FragmentNoteBinding
 import com.hossein.simplenote.model.Note
 import com.hossein.simplenote.viewmodel.NoteViewModel
+import java.util.*
 
 class NoteFragment : Fragment() {
 
@@ -25,20 +33,31 @@ class NoteFragment : Fragment() {
 
     private var noteId: Int = 0
 
-    private var noteColor: String = "#FF000000"
+    private var noteColor: String = "#FFFFFF"
+
+    private lateinit var preferences: SharedPreferences
+
+    private var onClicked = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         note = Note()
 
-        val args = arguments?.let { NoteFragmentArgs.fromBundle(it) }
-        noteId = args?.noteId?.id ?: 0
+        //preference
+        preferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-        noteColor = args?.noteColor ?: "#FF000000"
+        //args
+        val args = arguments?.let { NoteFragmentArgs.fromBundle(it) }
+        //args from home fragment
+        noteId = args?.noteId?.id ?: 0
+        //args from bottom sheet
+        noteColor = args?.noteColor ?: "#FFFFFF"
 
         noteViewModel = (activity as MainActivity).noteViewModel
         noteViewModel.loadNote(noteId)
+
+
     }
 
 
@@ -53,6 +72,13 @@ class NoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //use preference
+        preferences = context?.getSharedPreferences("preference", Context.MODE_PRIVATE) ?: return
+        binding.etNoteTitle.setText(preferences.getString("title", ""))
+        binding.etNoteBody.setText(preferences.getString("body", ""))
+
+
 
         binding.colorView.setBackgroundColor(Color.parseColor(noteColor))
 
@@ -71,24 +97,42 @@ class NoteFragment : Fragment() {
 
 
         binding.fabAddNote.setOnClickListener {
+
+            onClicked = true
+
             if (noteId == 1) {
                 updateNote()
             } else {
                 saveNote()
             }
+
         }
 
         binding.imgMore.setOnClickListener {
+
             findNavController().navigate(
                 R.id.action_noteFragment_to_noteBottomSheetFragment
             )
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        binding.layout.removeAllViews()
+    override fun onPause() {
+        super.onPause()
+
+        preferences.edit().apply(){
+            putString("title", binding.etNoteTitle.text.toString())
+            putString("body", binding.etNoteBody.text.toString())
+        }.apply()
+
+        if (onClicked){
+            val editor : SharedPreferences.Editor = preferences.edit()
+            editor.clear()
+            editor.apply()
+        }
+
+
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
@@ -111,6 +155,8 @@ class NoteFragment : Fragment() {
         } else {
             Toast.makeText(context, "save failed!", Toast.LENGTH_SHORT).show()
         }
+
+
     }
 
     private fun updateNote() {

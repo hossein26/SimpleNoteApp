@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hossein.simplenote.R
 import com.hossein.simplenote.databinding.FragmentNoteBottomSheetBinding
+import java.util.*
 
 class NoteBottomSheetFragment : BottomSheetDialogFragment() {
 
@@ -84,12 +86,14 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setListener()
-        /*
+
+    }
+
+    override fun onPause() {
+        super.onPause()
         val directions = NoteBottomSheetFragmentDirections
             .actionNoteBottomSheetFragmentToNoteFragment(noteColor = selectedColor)
         findNavController().navigate(directions)
-
-         */
     }
 
 
@@ -103,6 +107,7 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
             binding.imgNote6.setImageResource(0)
             binding.imgNote7.setImageResource(0)
             selectedColor = "#4e33ff"
+
 
         }
 
@@ -169,5 +174,6 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+
     }
 }
