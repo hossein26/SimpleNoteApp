@@ -1,15 +1,20 @@
 package com.hossein.simplenote.adapter
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.hossein.simplenote.MainActivity
+import com.hossein.simplenote.R
 import com.hossein.simplenote.databinding.NoteLayoutAdapterBinding
 import com.hossein.simplenote.fragments.HomeFragmentDirections
 import com.hossein.simplenote.model.Note
+import com.hossein.simplenote.viewmodel.NoteViewModel
 
 class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
@@ -55,6 +60,22 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
                 .actionHomeFragmentToNoteFragment(noteId = currentNote)
             view.findNavController().navigate(direction)
         }
+
+        holder.itemView.setOnLongClickListener {view ->
+            val noteViewModel: NoteViewModel = (view.context as MainActivity).noteViewModel
+            AlertDialog.Builder(view.context).apply {
+                setTitle("Delete Note")
+                setMessage("Are you sure you want to permanently delete this note?")
+                setPositiveButton("DELETE") { _, _ ->
+                    noteViewModel.deleteNote(currentNote)
+                    notifyDataSetChanged()
+                    Toast.makeText(view.context, "item deleted", Toast.LENGTH_SHORT).show()
+                }
+                setNegativeButton("CANCEL", null)
+            }.create().show()
+            true
+        }
+
     }
 
     override fun getItemCount(): Int {

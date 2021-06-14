@@ -91,6 +91,10 @@ class NoteBottomSheetFragment : BottomSheetDialogFragment() {
 
 
     private fun setListener() {
+        binding.imgLess.setOnClickListener {
+            dismiss()
+        }
+
         binding.fNote1.setOnClickListener {
 
             binding.imgNote1.setImageResource(R.drawable.ic_tick)
