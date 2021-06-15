@@ -1,7 +1,6 @@
 package com.hossein.simplenote.adapter
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +56,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         holder.itemBinding.tvNoteBody.text = currentNote.noteBody
         holder.itemBinding.cardView.setCardBackgroundColor(Color.parseColor(currentNote.color))
 
-        if (currentNote.color != "#202734") {
+        if (currentNote.color != R.color.black.toString()) {
             holder.itemBinding.tvNoteTitle.setTextColor(Color.BLACK)
             holder.itemBinding.tvNoteBody.setTextColor(Color.BLACK)
         }
@@ -82,19 +81,19 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             textDelete.setOnClickListener {
                 noteViewModel.deleteNote(currentNote)
                 notifyDataSetChanged()
-                Toast.makeText(view.context, "item deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, R.string.item_deleted_toast, Toast.LENGTH_SHORT).show()
                 alertDialog.dismiss()
             }
 
             textCancel.setOnClickListener {
                 alertDialog.dismiss()
             }
-        true
+            true
+        }
+
     }
 
-}
-
-override fun getItemCount(): Int {
-    return differ.currentList.size
-}
+    override fun getItemCount(): Int {
+        return differ.currentList.size
+    }
 }

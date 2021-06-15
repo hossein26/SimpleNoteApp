@@ -1,187 +1,202 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/layoutBottomSheet"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutBottomSheet"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?attr/colorOnSecondary"
     android:orientation="vertical"
     app:behavior_peekHeight="40dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    android:background="?attr/colorOnSecondary"
     tools:context=".MainActivity">
 
 
-
     <FrameLayout
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/imgLess"
             android:layout_width="wrap_content"
             android:layout_height="24dp"
             android:layout_gravity="center"
+            android:contentDescription="@string/close_more_option"
             android:src="@drawable/ic_less" />
     </FrameLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <FrameLayout
+            android:id="@+id/fNote1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote1">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_1"/>
+                android:background="@drawable/note_color_1" />
 
             <ImageView
                 android:id="@+id/imgNote1"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                android:contentDescription="@string/blue_color"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fNote2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote2">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_2"/>
+                android:background="@drawable/note_color_2" />
 
             <ImageView
                 android:id="@+id/imgNote2"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                android:contentDescription="@string/yellow_color"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fNote3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote3">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_3"/>
+                android:background="@drawable/note_color_3" />
 
             <ImageView
                 android:id="@+id/imgNote3"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/black"/>
+                android:contentDescription="@string/white_color"
+                app:tint="@color/black" />
         </FrameLayout>
 
 
         <FrameLayout
+            android:id="@+id/fNote4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote4">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_4"/>
+                android:background="@drawable/note_color_4" />
 
             <ImageView
                 android:id="@+id/imgNote4"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                android:contentDescription="@string/purple_color"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fNote5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote5">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_5"/>
+                android:background="@drawable/note_color_5" />
 
             <ImageView
                 android:id="@+id/imgNote5"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                android:contentDescription="@string/white_color"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/fNote6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote6">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_6"/>
+                android:background="@drawable/note_color_6" />
 
             <ImageView
                 android:id="@+id/imgNote6"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                android:contentDescription="@string/orange_color"
+                app:tint="@color/white" />
         </FrameLayout>
+
         <FrameLayout
+            android:id="@+id/fNote7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="5dp"
-            android:id="@+id/fNote7">
+            android:paddingStart="2.5dp"
+            android:paddingEnd="2.5dp">
 
             <View
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:background="@drawable/note_color_7"/>
+                android:background="@drawable/note_color_7" />
 
             <ImageView
                 android:id="@+id/imgNote7"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                app:tint="@color/white"/>
+                android:contentDescription="@string/black_color"
+                app:tint="@color/white" />
         </FrameLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="textEnd"
-            android:paddingEnd="10dp"
-            app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="Pick Color"
-            android:textColor="?attr/color"
-            android:maxLines="1"
-            android:textStyle="bold"
             android:ellipsize="end"
-            />
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="@string/pick_color"
+            android:textAlignment="textEnd"
+            android:textColor="?attr/color"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/etNoteTitle" />
     </LinearLayout>
 
     <LinearLayout
@@ -201,7 +216,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_image"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/add_image" />
 
         <TextView
             android:layout_width="match_parent"
@@ -209,7 +225,7 @@
             app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Add Image"
+            android:text="@string/add_image"
             android:textColor="?attr/color"
             android:textStyle="bold"
             android:maxLines="1"
@@ -238,7 +254,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_link"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp" />
+            android:layout_marginEnd="10dp"
+            android:contentDescription="@string/add_web_link" />
 
         <TextView
             android:layout_width="match_parent"
@@ -246,7 +263,7 @@
             app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="Add Web Link"
+            android:text="@string/add_web_link"
             android:textColor="?attr/color"
             android:textStyle="bold"
             android:maxLines="1"

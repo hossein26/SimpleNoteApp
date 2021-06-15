@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Note"
+        android:text="@string/delete_note"
         android:textStyle="bold"
         android:textSize="18sp"
         android:textColor="?attr/color"
@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Are you sure you want to permanently delete this note?"
+        android:text="@string/delete_message"
         android:textSize="16sp"
         android:textColor="?attr/color"
         android:layout_marginLeft="10dp"
@@ -35,7 +35,7 @@
             android:id="@+id/text_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CANCEL"
+            android:text="@string/cancel"
             android:textStyle="bold"
             android:textColor="?attr/color"
             android:layout_margin="5dp"/>
@@ -44,7 +44,7 @@
             android:id="@+id/text_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DELETE"
+            android:text="@string/delete"
             android:textStyle="bold"
             android:textColor="?attr/color"
             android:layout_margin="5dp"/>
