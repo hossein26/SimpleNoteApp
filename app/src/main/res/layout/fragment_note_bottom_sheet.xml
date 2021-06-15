@@ -9,7 +9,7 @@
     android:orientation="vertical"
     app:behavior_peekHeight="40dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
-    android:background="@color/white"
+    android:background="?attr/colorOnSecondary"
     tools:context=".MainActivity">
 
 
@@ -23,10 +23,10 @@
 
         <ImageView
             android:id="@+id/imgLess"
-            android:layout_gravity="center"
-            android:layout_width="24dp"
+            android:layout_width="wrap_content"
             android:layout_height="24dp"
-            android:src="@drawable/ic_less"/>
+            android:layout_gravity="center"
+            android:src="@drawable/ic_less" />
     </FrameLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -176,10 +176,10 @@
             app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/black"
-            android:textSize="12sp"
             android:text="Pick Color"
+            android:textColor="?attr/color"
             android:maxLines="1"
+            android:textStyle="bold"
             android:ellipsize="end"
             />
     </LinearLayout>
@@ -191,7 +191,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/white"
         android:gravity="center"
         android:layout_margin="10dp"
         android:orientation="horizontal">
@@ -202,8 +201,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_image"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            app:tint="@color/black" />
+            android:layout_marginEnd="10dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -211,9 +209,9 @@
             app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/black"
-            android:textSize="12sp"
             android:text="Add Image"
+            android:textColor="?attr/color"
+            android:textStyle="bold"
             android:maxLines="1"
             android:ellipsize="end"
             />
@@ -228,7 +226,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/white"
         android:gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
@@ -241,8 +238,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_link"
             android:layout_marginStart="5dp"
-            android:layout_marginEnd="10dp"
-            app:tint="@color/black" />
+            android:layout_marginEnd="10dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -250,9 +246,9 @@
             app:layout_constraintTop_toBottomOf="@id/etNoteTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/black"
-            android:textSize="12sp"
             android:text="Add Web Link"
+            android:textColor="?attr/color"
+            android:textStyle="bold"
             android:maxLines="1"
             android:ellipsize="end"
             />

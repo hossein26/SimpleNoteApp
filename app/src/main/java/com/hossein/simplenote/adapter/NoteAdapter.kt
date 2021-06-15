@@ -1,9 +1,12 @@
 package com.hossein.simplenote.adapter
 
 import android.app.AlertDialog
+import android.app.Dialog
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -54,6 +57,11 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         holder.itemBinding.tvNoteBody.text = currentNote.noteBody
         holder.itemBinding.cardView.setCardBackgroundColor(Color.parseColor(currentNote.color))
 
+        if (currentNote.color != "#202734") {
+            holder.itemBinding.tvNoteTitle.setTextColor(Color.BLACK)
+            holder.itemBinding.tvNoteBody.setTextColor(Color.BLACK)
+        }
+
         holder.itemView.setOnClickListener { view ->
 
             val direction = HomeFragmentDirections
@@ -61,24 +69,32 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             view.findNavController().navigate(direction)
         }
 
-        holder.itemView.setOnLongClickListener {view ->
+        holder.itemView.setOnLongClickListener { view ->
             val noteViewModel: NoteViewModel = (view.context as MainActivity).noteViewModel
-            AlertDialog.Builder(view.context).apply {
-                setTitle("Delete Note")
-                setMessage("Are you sure you want to permanently delete this note?")
-                setPositiveButton("DELETE") { _, _ ->
-                    noteViewModel.deleteNote(currentNote)
-                    notifyDataSetChanged()
-                    Toast.makeText(view.context, "item deleted", Toast.LENGTH_SHORT).show()
-                }
-                setNegativeButton("CANCEL", null)
-            }.create().show()
-            true
-        }
 
+            val dialogView = View.inflate(view.context, R.layout.alert_dialog, null)
+            val textDelete = dialogView.findViewById<TextView>(R.id.text_delete)
+            val textCancel = dialogView.findViewById<TextView>(R.id.text_cancel)
+
+            val alertDialog = AlertDialog.Builder(view.context).create()
+            alertDialog.setView(dialogView)
+            alertDialog.show()
+            textDelete.setOnClickListener {
+                noteViewModel.deleteNote(currentNote)
+                notifyDataSetChanged()
+                Toast.makeText(view.context, "item deleted", Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+
+            textCancel.setOnClickListener {
+                alertDialog.dismiss()
+            }
+        true
     }
 
-    override fun getItemCount(): Int {
-        return differ.currentList.size
-    }
+}
+
+override fun getItemCount(): Int {
+    return differ.currentList.size
+}
 }

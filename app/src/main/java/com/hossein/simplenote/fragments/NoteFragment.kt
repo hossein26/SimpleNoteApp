@@ -112,7 +112,7 @@ class NoteFragment : Fragment() {
 
         }
 
-        binding.imgMore.setOnClickListener {
+        binding.frameLayoutMore.setOnClickListener {
 
             findNavController().navigate(
                 R.id.action_noteFragment_to_noteBottomSheetFragment

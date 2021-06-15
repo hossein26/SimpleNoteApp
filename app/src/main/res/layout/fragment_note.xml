@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:id="@+id/layout"
     tools:context=".fragments.NoteFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?attr/colorOnSecondary"
         android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
-            android:background="@color/white"
             app:cardCornerRadius="5dp"
             app:cardElevation="8dp">
 
@@ -25,6 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
+                android:background="?attr/colorPrimary"
                 android:padding="16dp">
 
                 <View
@@ -43,8 +43,8 @@
                     android:ems="10"
                     android:hint="Type your title"
                     android:inputType="text"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
+                    android:textColor="?attr/color"
+                    android:textColorHint="#9F9F9F"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -53,12 +53,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="20dp"
+                    android:layout_marginBottom="25dp"
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:gravity="start|top"
                     android:hint="Type something..."
                     android:inputType="textMultiLine"
-                    android:textColor="@color/black"
+                    android:textColor="?attr/color"
                     android:textColorHint="#9F9F9F"
                     android:textSize="16sp" />
 
@@ -75,13 +76,14 @@
         android:layout_marginBottom="32dp"
         android:clickable="true"
         app:borderWidth="0dp"
-        android:backgroundTint="#BD4B4B"
+        android:src="@drawable/ic_tick"
         android:tintMode="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <FrameLayout
-        android:layout_width="match_parent"
+        android:id="@+id/frameLayoutMore"
+        android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
