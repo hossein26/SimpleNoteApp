@@ -36,4 +36,7 @@ class NoteViewModel(app: Application, private val noteRepository: NoteRepository
     fun loadNote(noteId: Int){
         noteIdLiveData.value = noteId
     }
+
+    fun searchNote(query: String?) =
+        noteRepository.searchNote(query)
 }
