@@ -5,6 +5,7 @@ import androidx.lifecycle.*
 import com.hossein.simplenote.model.Note
 import com.hossein.simplenote.repository.NoteRepository
 import kotlinx.coroutines.launch
+import java.io.File
 
 class NoteViewModel(app: Application, private val noteRepository: NoteRepository) :
     AndroidViewModel(app) {
@@ -29,11 +30,11 @@ class NoteViewModel(app: Application, private val noteRepository: NoteRepository
     fun getAllNote() = noteRepository.getAllNote()
 
     var noteLiveData: LiveData<Note> =
-        Transformations.switchMap(noteIdLiveData){ noteId ->
+        Transformations.switchMap(noteIdLiveData) { noteId ->
             noteRepository.getNote(noteId)
         }
 
-    fun loadNote(noteId: Int){
+    fun loadNote(noteId: Int) {
         noteIdLiveData.value = noteId
     }
 

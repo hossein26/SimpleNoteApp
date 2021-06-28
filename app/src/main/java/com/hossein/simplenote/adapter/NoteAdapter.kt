@@ -56,7 +56,7 @@ class NoteAdapter : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
         holder.itemBinding.tvNoteBody.text = currentNote.noteBody
         holder.itemBinding.cardView.setCardBackgroundColor(Color.parseColor(currentNote.color))
 
-        if (currentNote.color != R.color.black.toString()) {
+        if (currentNote.color != "#202734") {
             holder.itemBinding.tvNoteTitle.setTextColor(Color.BLACK)
             holder.itemBinding.tvNoteBody.setTextColor(Color.BLACK)
         }

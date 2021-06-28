@@ -1,8 +1,14 @@
 package com.hossein.simplenote.fragments
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.*
+import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +24,9 @@ import com.hossein.simplenote.databinding.FragmentNoteBinding
 import com.hossein.simplenote.model.Note
 import com.hossein.simplenote.viewmodel.NoteViewModel
 
+private const val IMAGE_PICK_CODE = 1000
+private const val PERMISSION_CODE = 1001
+
 class NoteFragment : Fragment() {
 
     private var _binding: FragmentNoteBinding? = null
@@ -28,6 +37,8 @@ class NoteFragment : Fragment() {
     private var selectedColor: String = "#FFFFFF"
     private lateinit var preferences: SharedPreferences
     private var onClicked = false
+
+    private var selectedImagePath = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,6 +84,18 @@ class NoteFragment : Fragment() {
                         binding.etNoteTitle.setText(note.noteTitle)
                         binding.etNoteBody.setText(note.noteBody)
                         binding.colorView.setBackgroundColor(Color.parseColor(note.color))
+
+                        if (note.imagePath != ""){
+                            selectedImagePath = note.imagePath
+                            binding.imgNote.setImageBitmap(BitmapFactory.decodeFile(note.imagePath))
+                            binding.layoutImage.visibility = View.VISIBLE
+                            binding.imgNote.visibility = View.VISIBLE
+                            binding.imgDelete.visibility = View.VISIBLE
+                        }else{
+                            binding.layoutImage.visibility = View.GONE
+                            binding.imgNote.visibility = View.GONE
+                            binding.imgDelete.visibility = View.GONE
+                        }
                     }
                 }
             )
@@ -92,6 +115,11 @@ class NoteFragment : Fragment() {
             findNavController().navigate(
                 R.id.action_noteFragment_to_noteBottomSheetFragment
             )
+        }
+
+        binding.imgDelete.setOnClickListener {
+            selectedImagePath = ""
+            binding.layoutImage.visibility = View.GONE
         }
     }
 
@@ -123,7 +151,8 @@ class NoteFragment : Fragment() {
         val noteBody = binding.etNoteBody.text.toString().trim()
 
         if (noteTitle.isNotEmpty()) {
-            val note = Note(id = noteId, noteTitle = noteTitle, noteBody = noteBody, color = selectedColor)
+            val note =
+                Note(id = noteId, noteTitle = noteTitle, noteBody = noteBody, color = selectedColor, imagePath = selectedImagePath)
 
             noteViewModel.addNote(note)
             Toast.makeText(context, R.string.saved_toast, Toast.LENGTH_SHORT).show()
@@ -142,7 +171,7 @@ class NoteFragment : Fragment() {
 
         if (noteTitle.isNotEmpty()) {
             val note =
-                Note(id = noteId, noteTitle = noteTitle, noteBody = noteBody, color = selectedColor)
+                Note(id = noteId, noteTitle = noteTitle, noteBody = noteBody, color = selectedColor, imagePath = selectedImagePath)
 
             noteViewModel.updateNote(note)
             Toast.makeText(context, R.string.updated_toast, Toast.LENGTH_SHORT).show()
@@ -183,6 +212,9 @@ class NoteFragment : Fragment() {
                     selectedColor = p1.getStringExtra("selectedColor")!!
                     binding.colorView.setBackgroundColor(Color.parseColor(selectedColor))
                 }
+                "Image" -> {
+                    imageButtonClicked()
+                }
                 else -> {
                     selectedColor = p1.getStringExtra("selectedColor")!!
                     binding.colorView.setBackgroundColor(Color.parseColor(selectedColor))
@@ -190,4 +222,91 @@ class NoteFragment : Fragment() {
             }
         }
     }
+
+    private fun imageButtonClicked() {
+        //check runtime permission
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (requireContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                //permission denied
+                val permission = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                //show popup to request runtime
+                requestPermissions(permission, PERMISSION_CODE)
+            }else{
+                //permission already granted
+                pickImageFromGallery()
+            }
+        }else{
+            //system os <= Marshmallow
+            pickImageFromGallery()
+        }
+    }
+
+    //handle permission
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when(requestCode){
+            PERMISSION_CODE ->{
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED ){
+                    //permission from popup granted
+                    pickImageFromGallery()
+                }else{
+                    //permission from popup denied
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            binding.imgNote.setImageURI(data?.data)
+            binding.layoutImage.visibility = View.VISIBLE
+            binding.imgNote.visibility = View.VISIBLE
+            binding.imgDelete.visibility = View.VISIBLE
+
+           selectedImagePath = getPathFromUri(data?.data!!)!!
+        }
+    }
+
+    private fun getPathFromUri(contentUri: Uri): String? {
+        val filePath: String?
+
+        val cursor = requireActivity().contentResolver.query(contentUri,null,null,null,null)
+        if (cursor == null){
+            filePath = contentUri.path
+        }else{
+            cursor.moveToFirst()
+            val index = cursor.getColumnIndex("_data")
+            filePath = cursor.getString(index)
+            cursor.close()
+        }
+        return filePath
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -12,5 +12,6 @@ data class Note(
     var id: Int = 0,
     var noteTitle: String = "",
     val noteBody: String = "",
-    val color: String = "#FFFFFF"
+    val color: String = "#FFFFFF",
+    val imagePath: String = ""
 ): Parcelable
